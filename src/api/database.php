@@ -1,0 +1,116 @@
+<?php
+// This file holds the database object that allows php to communicate with the mySQL database 
+// This is an API, so simply use require 'database.php' to import this file and use the Database object to  perform CRUD operation to mySQL database 
+
+
+class DatabaseClient { 
+    
+
+    // Runs a select SQL statement - SELECT entity from tables 
+    // TODO figure what format this data should return 
+    public function query($entity, $table) {
+        $conn = $this->connect_to_DB();
+
+        $conn->query("SELECT $entity FROM $table"); 
+    }
+
+    // Give it a custom SQL command and it will execute it 
+    public function customSQLcommand( $sql_statement ) { 
+        $conn = $this->connect_to_DB(); 
+
+       echo $conn->query( $sql_statement )->fetchColumn(); 
+    }
+
+    // Generic Insert function. Specify table name and the data 
+    // NOTE PHP does not have a way for me to enforce validity check of data 
+    // like React has with type interface, so for now, we will just assume 
+    // the data is good and rely on mySQL rejecting invalid data (hopefully :pray )
+    public function insertIntoTable( string $table, array $data ) {
+        $conn = $this->connect_to_DB(); 
+
+        try { 
+            $columns = implode(", ", array_keys($data)); // Create a list of the data key 
+            $placeholder = implode(", ", array_fill(0, count($data), "?"));
+
+            $sql = "INSERT INTO $table ($columns) VALUES ($placeholder)";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(array_values($data));
+
+        } catch (PDOException $e) {
+            echo "Error when trying to insert into $table: ". $e->getMessage();
+            exit;
+        }
+    }
+
+    // Change the arguments to match database. 
+    // ? Is there a better way to do this ? Perhaps a type interface? Is that possible in PHP?
+    public function insertIntoCarTable($model, $year, $color, $price) {
+        
+        //! NOTE: Do not pass in the function parameter as show below b/c this exposes code to SQL injection vulnerability!
+        //$sql = "INSERT INTO Car (Model, Year, Color, Price) VALUES ($model, $year, $color, $price)";
+        
+        $conn = $this->connect_to_DB();
+        
+        try {
+            $sql = "INSERT INTO Car (Model, Year, Color, Price) VALUES (:model, :year, :color, :price)";
+
+            $sql_stmt = $conn->prepare($sql);
+
+            if ($sql_stmt == false ) {
+                echo "Error: Could not prepare sql statement!";
+                exit;
+            }
+
+            $sql_stmt->bindParam(":model", $model);
+            $sql_stmt->bindParam(":year", $year);
+            $sql_stmt->bindParam(":color", $color);
+            $sql_stmt->bindParam(":price", $price);
+
+            $sql_stmt->execute();
+            
+        } catch (PDOException $e) {
+            echo "Error when trying to insert into Car Table:" . $e->getMessage();
+            exit;
+        }
+
+
+    }
+    
+
+
+
+
+
+    // ** Everything below this comment is internal functions
+
+    // Use internally by the other public function inside DatabaseClient. 
+    // Returns a db connection client to do CRUD operationo n the DB if succesfully conneced
+    private function connect_to_DB() {
+        require 'config.php'; // import sensitive database credientials 
+        $db_connection_string = "mysql:host=$host;dbname=$db;charset=UTF8"; // Private connection string to the mySQL that specify which database and root user credientials
+  
+        try { 
+
+            $pdo = new PDO($db_connection_string, $user, $password); 
+
+            // $current_db = $pdo->query('SELECT DATABASE()')->fetchColumn();
+            // echo $current_db;
+            
+            // Set the PDO error mode to exception (for better error handling)
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            return $pdo;
+
+        } catch (PDOException $e){ 
+            echo "Failed to connected to DB: " . $e->getMessage(); 
+            exit;
+        }
+    }
+    
+
+
+}
+
+
+?>
