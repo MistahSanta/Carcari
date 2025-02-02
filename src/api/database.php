@@ -6,12 +6,42 @@
 class DatabaseClient { 
     
 
-    // Runs a select SQL statement - SELECT entity from tables 
-    // TODO figure what format this data should return 
-    public function query($entity, $table) {
+    public function query_all($table) { 
         $conn = $this->connect_to_DB();
+        // Filter the possible names to prevent SQL injection 
+        $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
+        
+        try {
+            $sql_stmt = $conn->query("SELECT * FROM $table"); 
+            
+            if ($sql_stmt == false) { 
+                throw new Exception("Query failed! " . conn->errorInfo() );
+            }
+            return $sql_stmt;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    // Runs a select SQL statement - SELECT entity from tables 
+    public function query($entry, $table) {
+        $conn = $this->connect_to_DB();
+        // Filter the possible names to prevent SQL injection 
+        $entity = preg_replace('/[^a-zA-Z0-9_]/', '', $entry);
+        $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
+        
+        try {
+            $sql_stmt = $conn->query("SELECT $entry FROM $table"); 
+            
+            if ($sql_stmt == false) { 
+                throw new Exception("Query failed! " . conn->errorInfo() );
+            }
+            return $sql_stmt;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
 
-        $conn->query("SELECT $entity FROM $table"); 
     }
 
     // Give it a custom SQL command and it will execute it 
@@ -42,7 +72,8 @@ class DatabaseClient {
             exit;
         }
     }
-
+    // CRUD - create read update delete
+    
     // Change the arguments to match database. 
     // ? Is there a better way to do this ? Perhaps a type interface? Is that possible in PHP?
     public function insertIntoCarTable($model, $year, $color, $price) {
@@ -87,7 +118,7 @@ class DatabaseClient {
     // Use internally by the other public function inside DatabaseClient. 
     // Returns a db connection client to do CRUD operationo n the DB if succesfully conneced
     private function connect_to_DB() {
-        require 'config.php'; // import sensitive database credientials 
+        require  __DIR__ . "/../../config.php"; // import sensitive database credientials 
         $db_connection_string = "mysql:host=$host;dbname=$db;charset=UTF8"; // Private connection string to the mySQL that specify which database and root user credientials
   
         try { 
