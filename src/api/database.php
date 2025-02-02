@@ -23,7 +23,7 @@ class DatabaseClient {
             return false;
         }
     }
-    // Runs a select SQL statement - SELECT entity from tables 
+    // Runs a select SQL statement - SELECT entry from tables 
     public function query($entry, $table) {
         $conn = $this->connect_to_DB();
         // Filter the possible names to prevent SQL injection 
@@ -45,6 +45,7 @@ class DatabaseClient {
     }
 
     // Give it a custom SQL command and it will execute it 
+    // Only for development use - gonna remove later
     public function customSQLcommand( $sql_statement ) { 
         $conn = $this->connect_to_DB(); 
 
@@ -107,11 +108,6 @@ class DatabaseClient {
 
 
     }
-    
-
-
-
-
 
     // ** Everything below this comment is internal functions
 
