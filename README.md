@@ -35,3 +35,12 @@ PDO how to enable:
         - extension=pdo_mysql
 
 PDO Documentation: https://www.php.net/manual/en/book.pdo.php
+
+
+
+How to run:
+
+1) Using a PHP server (Recommended): 
+    - Download the PHP Server extension from VS code and right click on 'index.php' to Serve the project 
+
+2) Manually install php server and use the command line. Run 'php <filename>' to run a small php code for testing purpose
