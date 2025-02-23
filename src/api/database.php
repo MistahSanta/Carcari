@@ -6,7 +6,7 @@
 class DatabaseClient { 
     
 
-    public function query_all($table) { 
+    public function query_all( string $table) { 
         $conn = $this->connect_to_DB();
         // Filter the possible names to prevent SQL injection 
         $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
@@ -23,15 +23,18 @@ class DatabaseClient {
             return false;
         }
     }
-    // Runs a select SQL statement - SELECT entry from tables 
-    public function query($entry, $table) {
+    // Runs a Select SQL statement
+    // entry = Table attribute that you want to select 
+    // condition = statement after WHERE for filtering. If not given, assume no condition to filter for   
+    public function query(string $entry, string $table, string $condition = null ) {
         $conn = $this->connect_to_DB();
         // Filter the possible names to prevent SQL injection 
         $entity = preg_replace('/[^a-zA-Z0-9_]/', '', $entry);
         $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
         
         try {
-            $sql_stmt = $conn->query("SELECT $entry FROM $table"); 
+            $sql_stmt = ( is_null($condition) ) ? $conn->query("SELECT $entry FROM $table") // Condition is null, so dont add WHERE statement
+                                                : $conn->query("SELECT $entry FROM $table WHERE $condition ");
             
             if ($sql_stmt == false) { 
                 throw new Exception("Query failed! " . conn->errorInfo() );
@@ -44,8 +47,9 @@ class DatabaseClient {
 
     }
 
+
     // Give it a custom SQL command and it will execute it 
-    // Only for development use - gonna remove later
+    // Only for development use - remove for production use
     public function customSQLcommand( $sql_statement ) { 
         $conn = $this->connect_to_DB(); 
 
@@ -73,46 +77,14 @@ class DatabaseClient {
             exit;
         }
     }
-    // CRUD - create read update delete
-    
-    // Change the arguments to match database. 
-    // ? Is there a better way to do this ? Perhaps a type interface? Is that possible in PHP?
-    public function insertIntoCarTable($model, $year, $color, $price) {
-        
-        //! NOTE: Do not pass in the function parameter as show below b/c this exposes code to SQL injection vulnerability!
-        //$sql = "INSERT INTO Car (Model, Year, Color, Price) VALUES ($model, $year, $color, $price)";
-        
-        $conn = $this->connect_to_DB();
-        
-        try {
-            $sql = "INSERT INTO Car (Model, Year, Color, Price) VALUES (:model, :year, :color, :price)";
-
-            $sql_stmt = $conn->prepare($sql);
-
-            if ($sql_stmt == false ) {
-                echo "Error: Could not prepare sql statement!";
-                exit;
-            }
-
-            $sql_stmt->bindParam(":model", $model);
-            $sql_stmt->bindParam(":year", $year);
-            $sql_stmt->bindParam(":color", $color);
-            $sql_stmt->bindParam(":price", $price);
-
-            $sql_stmt->execute();
-            
-        } catch (PDOException $e) {
-            echo "Error when trying to insert into Car Table:" . $e->getMessage();
-            exit;
-        }
 
 
-    }
 
-    // ** Everything below this comment is internal functions
+
+    // ** Everything below this comment is internal functions by the Database Class functions
 
     // Use internally by the other public function inside DatabaseClient. 
-    // Returns a db connection client to do CRUD operationo n the DB if succesfully conneced
+    // Returns a db connection client to do CRUD operation on the DB if succesfully connected
     private function connect_to_DB() {
         require  __DIR__ . "/../../config.php"; // import sensitive database credientials 
         $db_connection_string = "mysql:host=$host;dbname=$db;charset=UTF8"; // Private connection string to the mySQL that specify which database and root user credientials

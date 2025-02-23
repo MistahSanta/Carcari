@@ -14,22 +14,23 @@ ini_set('display_errors', 1);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <?php include "styles.php" // Load css styles used throughout the program ?>
     <title>Carcari</title>
 <head>
 
-
+<!-- TODO task for the team 
+ //TODO 1) Add NavBar 
+        2) User login with different access level 
+        3) Add CRUD functionality 
+        4) Add search button 
+        5) Add Buy and sell button on Car Card 
+-->
 
 <body>
+    <nav><a href="inputForm.php">a</a></nav>
 
-<h1>My first PHP page LMAO</h1>
-
-<!-- Add the Inventory's page into here !-->
-<?php include "inventory.php" ?>
-
-
-
-
+<!-- Add the Inventory's page into here -->
+<?php include "inventory.php" ?> 
 
 
 
@@ -45,20 +46,24 @@ ini_set('display_errors', 1);
 
 <?php
 
-//require 'src/api/database.php';
+include_once 'src/api/database.php';
 
-// $carcari = new  DatabaseClient(); 
+$carcari = new  DatabaseClient(); 
 
 // $data = [
-//     'model' => 'Honda',
-//     "year" => 1999,
-//     "color" => 'blue',
-//     "price" => 123423.23
+//     'Model' => 'Polestar 2',
+//     "Price" => 32960,
+//     "Year" => 2023,
+//     "Mileage" => 4776,
+//     "Make" => "IDK lol",
+//     "Color" => "Snow White",
+//     "VIN"   => 123456789
 // ];
 
-// $carcari->insertIntoTable("Car", $data);
+//echo $carcari->query("Model", "Cars", "year > 2020") ->fetch(PDO::FETCH_ASSOC)["Model"]; // Fetch one row as an associative array
 
-//$carcari->insertIntoCarTable("Toyota Camry", 2012, "Red", 12342.43);
+//$carcari->insertIntoTable("Cars", $data);
+
 
 ?>
 
