@@ -19,7 +19,7 @@ ini_set('display_errors', 1);
 <head>
 
 <!-- TODO task for the team 
- //TODO 1) Add NavBar 
+        //TODO 1) Add NavBar 
         2) User login with different access level 
         3) Add CRUD functionality 
         4) Add search button 
@@ -60,7 +60,7 @@ $carcari = new  DatabaseClient();
 //     "VIN"   => 123456789
 // ];
 
-//echo $carcari->query("Model", "Cars", "year > 2020") ->fetch(PDO::FETCH_ASSOC)["Model"]; // Fetch one row as an associative array
+echo $carcari->query_all("Cars", ["year > 2020", "Price > 3000"] )->fetch(PDO::FETCH_ASSOC); // Fetch one row as an associative array
 
 //$carcari->insertIntoTable("Cars", $data);
 

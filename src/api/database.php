@@ -5,15 +5,20 @@
 
 class DatabaseClient { 
     
-
-    public function query_all( string $table) { 
+    // TODO allow for multiple entries by passing in array of strings
+    public function query_all( string $table, array $condition = null ) { 
         $conn = $this->connect_to_DB();
         // Filter the possible names to prevent SQL injection 
         $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
         
         try {
-            $sql_stmt = $conn->query("SELECT * FROM $table"); 
+            $sql = is_null($condition) ? "SELECT * FROM $table" // Condition is null, so dont add WHERE statement
+                                       : "SELECT * FROM $table WHERE " . implode(" AND ", $condition);
             
+            echo "SQL Statement: $sql\n\n"; //debugging 
+            
+            $sql_stmt = $conn->query( $sql );
+
             if ($sql_stmt == false) { 
                 throw new Exception("Query failed! " . conn->errorInfo() );
             }
@@ -24,18 +29,23 @@ class DatabaseClient {
         }
     }
     // Runs a Select SQL statement
-    // entry = Table attribute that you want to select 
+    // entry = Table attribute that you want to select,
     // condition = statement after WHERE for filtering. If not given, assume no condition to filter for   
-    public function query(string $entry, string $table, string $condition = null ) {
+    // TODO allow for multiple entries by passing in array of strings
+    public function query(string $entry, string $table, array $condition = null ) {
         $conn = $this->connect_to_DB();
         // Filter the possible names to prevent SQL injection 
         $entity = preg_replace('/[^a-zA-Z0-9_]/', '', $entry);
         $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
         
         try {
-            $sql_stmt = ( is_null($condition) ) ? $conn->query("SELECT $entry FROM $table") // Condition is null, so dont add WHERE statement
-                                                : $conn->query("SELECT $entry FROM $table WHERE $condition ");
+            $sql = is_null($condition) ? "SELECT $entry FROM $table" // Condition is null, so dont add WHERE statement
+                                       : "SELECT $entry FROM $table WHERE " . implode(" AND ", $condition);
             
+            //echo "SQL Statement: $sql\n\n"; //debugging 
+            
+            $sql_stmt = $conn->query( $sql );
+
             if ($sql_stmt == false) { 
                 throw new Exception("Query failed! " . conn->errorInfo() );
             }
