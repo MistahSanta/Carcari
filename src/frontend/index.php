@@ -29,36 +29,12 @@ ini_set('display_errors', 1);
     <!-- <nav><a href="inputForm.php">a</a></nav> -->
 
 <!-- Add the Inventory's page into here -->
-<?php include "inventory.php" ?> 
-<?php// include "loginPage.php" ?>
+<?php //include "inventory.php" ?> 
+<?php include "loginPage.php" ?>
 
 
 
 
-
-<?php
-
-// include_once 'src/api/database.php';
-
-// $carcari = new  DatabaseClient(); 
-
-// $data = [
-//     'Model' => 'Polestar 2',
-//     "Price" => 32960,
-//     "Year" => 2023,
-//     "Milage" => 4776,
-//     "Make" => "IDK lol",
-//     "Color" => "Snow White",
-//     "Engine" => "V8",
-//     "Trim" => "SOMETHIGN LOL"
-// ];
-
-// //echo $carcari->query_all("Cars", ["year > 2020", "Price > 3000"] )->fetch(PDO::FETCH_ASSOC); // Fetch one row as an associative array
-
-// $carcari->insertIntoTable("Car", $data);
-
-
-?>
 
 
 

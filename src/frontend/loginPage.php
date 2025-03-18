@@ -40,14 +40,14 @@
 
     <div class="login-container">
         <h2>Login</h2>
-        <form action="your_login_script.php" method="post">
+        <form action="../backend/handleLogin.php" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <input type="submit" value="Login">
+            <input type="submit" name="Login" value="Login">
         </form>
     </div>
 
