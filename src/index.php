@@ -50,19 +50,20 @@ include_once 'src/api/database.php';
 
 $carcari = new  DatabaseClient(); 
 
-// $data = [
-//     'Model' => 'Polestar 2',
-//     "Price" => 32960,
-//     "Year" => 2023,
-//     "Mileage" => 4776,
-//     "Make" => "IDK lol",
-//     "Color" => "Snow White",
-//     "VIN"   => 123456789
-// ];
+$data = [
+    'Model' => 'Polestar 2',
+    "Price" => 32960,
+    "Year" => 2023,
+    "Milage" => 4776,
+    "Make" => "IDK lol",
+    "Color" => "Snow White",
+    "Engine" => "V8",
+    "Trim" => "SOMETHIGN LOL"
+];
 
-echo $carcari->query_all("Cars", ["year > 2020", "Price > 3000"] )->fetch(PDO::FETCH_ASSOC); // Fetch one row as an associative array
+//echo $carcari->query_all("Cars", ["year > 2020", "Price > 3000"] )->fetch(PDO::FETCH_ASSOC); // Fetch one row as an associative array
 
-//$carcari->insertIntoTable("Cars", $data);
+$carcari->insertIntoTable("Car", $data);
 
 
 ?>

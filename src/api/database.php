@@ -15,7 +15,7 @@ class DatabaseClient {
             $sql = is_null($condition) ? "SELECT * FROM $table" // Condition is null, so dont add WHERE statement
                                        : "SELECT * FROM $table WHERE " . implode(" AND ", $condition);
             
-            echo "SQL Statement: $sql\n\n"; //debugging 
+            //echo "SQL Statement: $sql\n\n"; //debugging 
             
             $sql_stmt = $conn->query( $sql );
 
