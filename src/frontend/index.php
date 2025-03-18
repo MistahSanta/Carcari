@@ -14,7 +14,6 @@ ini_set('display_errors', 1);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include "styles.php" // Load css styles used throughout the program ?>
     <title>Carcari</title>
 <head>
 
@@ -27,18 +26,11 @@ ini_set('display_errors', 1);
 -->
 
 <body>
-    <nav><a href="inputForm.php">a</a></nav>
+    <!-- <nav><a href="inputForm.php">a</a></nav> -->
 
 <!-- Add the Inventory's page into here -->
 <?php include "inventory.php" ?> 
-
-
-
-
-
-
-
-
+<?php// include "loginPage.php" ?>
 
 
 
@@ -46,24 +38,24 @@ ini_set('display_errors', 1);
 
 <?php
 
-include_once 'src/api/database.php';
+// include_once 'src/api/database.php';
 
-$carcari = new  DatabaseClient(); 
+// $carcari = new  DatabaseClient(); 
 
-$data = [
-    'Model' => 'Polestar 2',
-    "Price" => 32960,
-    "Year" => 2023,
-    "Milage" => 4776,
-    "Make" => "IDK lol",
-    "Color" => "Snow White",
-    "Engine" => "V8",
-    "Trim" => "SOMETHIGN LOL"
-];
+// $data = [
+//     'Model' => 'Polestar 2',
+//     "Price" => 32960,
+//     "Year" => 2023,
+//     "Milage" => 4776,
+//     "Make" => "IDK lol",
+//     "Color" => "Snow White",
+//     "Engine" => "V8",
+//     "Trim" => "SOMETHIGN LOL"
+// ];
 
-//echo $carcari->query_all("Cars", ["year > 2020", "Price > 3000"] )->fetch(PDO::FETCH_ASSOC); // Fetch one row as an associative array
+// //echo $carcari->query_all("Cars", ["year > 2020", "Price > 3000"] )->fetch(PDO::FETCH_ASSOC); // Fetch one row as an associative array
 
-$carcari->insertIntoTable("Car", $data);
+// $carcari->insertIntoTable("Car", $data);
 
 
 ?>

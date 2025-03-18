@@ -1,68 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Dealership Inventory</title>
-    <style>
-        body {
-            display: flex;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
-        }
-        .filter-container {
-            width: 20%;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-right: 20px;
-        }
-        .filter {
-            margin-bottom: 20px;
-        }
-        .filter label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .filter input, .filter select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .car-list {
-            width: 80%;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .car-card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            width: calc(50% - 45px); /* Adjusted to fit two cards per row */
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            background-color: #fff;
-            display: flex;
-        }
-        .car-image {
-            width: auto; /* Adjusted the image size */
-            height: 350px;
-            margin-left: 0px;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            margin-right: 20px;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="filter-container">
+
+<!-- Inventory Page for Car dealership --> 
+<!-- Style for inventory.php -->
+<style>
+    body {
+        display: flex;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 20px;
+    }
+    .filter-container {
+        width: 20%;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-right: 20px;
+    }
+    .filter {
+        margin-bottom: 20px;
+    }
+    .filter label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .filter input, .filter select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .car-list {
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .car-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        width: calc(50% - 45px); /* Adjusted to fit two cards per row */
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        background-color: #fff;
+        display: flex;
+    }
+    .car-image {
+        width: auto; /* Adjusted the image size */
+        height: 350px;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 20px;
+        border-radius: 5px;
+    }
+</style>
+
+<!-- Filter tab on the Inventory page -->
+<div class="filter-container">
         <h3>Filters</h3>
         <div class="filter">
             <label for="price">Price Range:</label>
@@ -225,97 +222,48 @@
             </select>
         </div>
     </div>
+
+
     <div class="car-list">
-        <div class="car-card">
-            <img src="Polestar2.webp" alt="2023 Polestar 2" class="car-image">
-            <div>
-                <h4>Polestar 2</h4>
-                <p>Price: $32,960</p>
-                <p>Year: 2023</p>
-                <p>Mileage: 4,776</p>
-                <p>Drivetrain: AWD</p>
-                <p>Body Style: Sedan</p>
-                <p>Fuel Type: Electric</p>
-                <p>Exterior Color: Snow White</p>
-                <p>Transmission: Automatic</p>
-                <p>Condition: Used </p>
-            </div>
-        </div>
-        <div class="car-card">
-            <img src="KiaEV6GT.webp" alt="2023 Kia EV6 GT" class="car-image">
-            <div>
-                <h4>Kia EV6 GT</h4>
-                <p>Price: $36,981</p>
-                <p>Year: 2023</p>
-                <p>Mileage: 14,107</p>
-                <p>Drivetrain: AWD</p>
-                <p>Body Style: SUV</p>
-                <p>Fuel Type: Electric</p>
-                <p>Exterior Color: Aurora Black</p>
-                <p>Transmission: Automatic</p>
-                <p>Condition: Used</p>
-            </div>
-        </div>
-        <div class="car-card">
-            <img src="TeslaM3LR.webp" alt="2024 Tesla Model 3 Long Range" class="car-image">
-            <div>
-                <h4>Tesla Model 3 Long Range</h4>
-                <p>Price: $36,985</p>
-                <p>Year: 2024</p>
-                <p>Mileage: 8,731</p>
-                <p>Drivetrain: AWD</p>
-                <p>Body Style: Sedan</p>
-                <p>Fuel Type: Electric</p>
-                <p>Exterior Color: Stealth Grey</p>
-                <p>Transmission: Automatic</p>
-                <p>Condition: Used</p>
-            </div>
-        </div>
-        <div class="car-card">
-            <img src="GR86P.webp" alt="2023 Toyota GR86 Premium" class="car-image">
-            <div>
-                <h4>Toyota GR86 Premium</h4>
-                <p>Price: $26,990</p>
-                <p>Year: 2023</p>
-                <p>Mileage: 33,824</p>
-                <p>Drivetrain: RWD</p>
-                <p>Body Style: Coupe</p>
-                <p>Fuel Type: Gasoline</p>
-                <p>Exterior Color: Neptune Blue</p>
-                <p>Transmission: Manual</p>
-                <p>Condition: Used</p>
-            </div>
-        </div>
-        <div class="car-card">
-            <img src="MBGT63.webp" alt="2021 Mercedes-Benz AMG GT 63" class="car-image">
-            <div>
-                <h4>Mercedes-Benz AMG GT 63</h4>
-                <p>Price: $79,500</p>
-                <p>Year: 2021</p>
-                <p>Mileage: 47,621</p>
-                <p>Drivetrain: AWD</p>
-                <p>Body Style: Coupe</p>
-                <p>Fuel Type: Gasoline</p>
-                <p>Exterior Color: Polar White</p>
-                <p>Transmission: Automatic</p>
-                <p>Condition: Used</p>
-            </div>
-        </div>
-        <div class="car-card">
-            <img src="911TurboS.webp" alt="2024 Porsche 911 Turbo S" class="car-image">
-            <div>
-                <h4>Porsche 911 Turbo S</h4>
-                <p>Price: $279,992</p>
-                <p>Year: 2024</p>
-                <p>Mileage: 7</p>
-                <p>Drivetrain: AWD</p>
-                <p>Body Style: Coupe</p>
-                <p>Fuel Type: Gasoline</p>
-                <p>Exterior Color: Pure White</p>
-                <p>Transmission: Automatic</p>
-                <p>Condition: New</p>
-            </div>
-        </div>
+    <!-- Dynamically load the Car's Card from the mySQL Database -->
+    <?php
+        include_once  __DIR__ . '/../api/database.php';
+        // First, grab the Car entities from the Database
+        $client = new  DatabaseClient();  
+        $car_entities = $client->query_all("Car"); // Select Everything from Car Table 
+
+
+        // Now we have the car entries, so display them on the card, so 
+        // dynamically generate these card with this info from the database 
+        if ($car_entities) {
+            // Generate the HTML that PHP will spit back to index.php 
+            // I wish there was a better way to do this tbh 
+            while ( $entry = $car_entities->fetch(PDO::FETCH_ASSOC)) {
+                echo "<div class='car-card'>";
+                    //echo "<div class='card-image'>";
+                    echo "<img src='https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&height=900&width=1600&fit=bounds' alt='Picture of a car' class='car-image'>";
+                    echo "<div>";
+
+                        echo "<h4>"          . htmlspecialchars($entry['Model'])  . "</h4>";
+                        echo "<p> Price: "   . htmlspecialchars($entry['Price'])  . "</p>";
+                        echo "<p> Year: "    . htmlspecialchars($entry['Year'])   . "</p>";
+                        echo "<p> Mileage: " . htmlspecialchars($entry['Mileage']) . "</p>";
+                        echo "<p> Color: "   . htmlspecialchars($entry['Color']) . "</p>";
+                        echo "<p> More Stuff: Haven't implemented in database yet! </p>";
+                    
+                    //echo "<p> : " . htmlspecialchars($entry['Milage']) . "</p>";
+                    //echo "<p> Mileage: " . htmlspecialchars($entry['Milage']) . "</p>";
+                    echo "</div>";
+                echo "</div>";
+            }
+        }
+    ?>
      </div>
+
+
+
+
+<body>
+   
 </body>
 </html>
