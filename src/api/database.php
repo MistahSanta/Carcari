@@ -20,7 +20,7 @@ class DatabaseClient {
             $sql_stmt = $conn->query( $sql );
 
             if ($sql_stmt == false) { 
-                throw new Exception("Query failed! " . conn->errorInfo() );
+                throw new Exception("Query failed! " . $conn->errorInfo() );
             }
             return $sql_stmt;
         } catch (PDOException $e) {
@@ -47,7 +47,7 @@ class DatabaseClient {
             $sql_stmt = $conn->query( $sql );
 
             if ($sql_stmt == false) { 
-                throw new Exception("Query failed! " . conn->errorInfo() );
+                throw new Exception("Query failed! " . $conn->errorInfo() );
             }
             return $sql_stmt;
         } catch (PDOException $e) {
