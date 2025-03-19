@@ -5,14 +5,13 @@
 
 class DatabaseClient { 
     
-    // TODO allow for multiple entries by passing in array of strings
-    public function query_all( string $table, array $condition = null ) { 
+    // Retrieve all records from a table, optionally filtering by conditions
+    public function query_all(string $table, array $condition = null) { 
         $conn = $this->connect_to_DB();
-        // Filter the possible names to prevent SQL injection 
-        $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
+        $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table); // Prevent SQL injection
         
         try {
-            $sql = is_null($condition) ? "SELECT * FROM $table" // Condition is null, so dont add WHERE statement
+            $sql = is_null($condition) ? "SELECT * FROM $table"
                                        : "SELECT * FROM $table WHERE " . implode(" AND ", $condition);
             
             //echo "SQL Statement: $sql\n\n"; //debugging 
@@ -22,104 +21,107 @@ class DatabaseClient {
             if ($sql_stmt == false) { 
                 throw new Exception("Query failed! " . $conn->errorInfo() );
             }
-            return $sql_stmt;
+            return $sql_stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return false;
         }
     }
-    // Runs a Select SQL statement
-    // entry = Table attribute that you want to select,
-    // condition = statement after WHERE for filtering. If not given, assume no condition to filter for   
-    // TODO allow for multiple entries by passing in array of strings
-    public function query(string $entry, string $table, array $condition = null ) {
+
+    // Retrieve specific entries from a table with optional conditions
+    public function query(string $entry, string $table, array $condition = null) {
         $conn = $this->connect_to_DB();
-        // Filter the possible names to prevent SQL injection 
-        $entity = preg_replace('/[^a-zA-Z0-9_]/', '', $entry);
+        $entry = preg_replace('/[^a-zA-Z0-9_]/', '', $entry);
         $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
         
         try {
-            $sql = is_null($condition) ? "SELECT $entry FROM $table" // Condition is null, so dont add WHERE statement
+            $sql = is_null($condition) ? "SELECT $entry FROM $table"
                                        : "SELECT $entry FROM $table WHERE " . implode(" AND ", $condition);
             
-            //echo "SQL Statement: $sql\n\n"; //debugging 
-            
-            $sql_stmt = $conn->query( $sql );
-
-            if ($sql_stmt == false) { 
-                throw new Exception("Query failed! " . $conn->errorInfo() );
+            $sql_stmt = $conn->query($sql);
+            if ($sql_stmt === false) { 
+                throw new Exception("Query failed! " . implode(", ", $conn->errorInfo()));
             }
-            return $sql_stmt;
+            return $sql_stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return false;
         }
-
     }
 
-
-    // Give it a custom SQL command and it will execute it 
-    // Only for development use - remove for production use
-    public function customSQLcommand( $sql_statement ) { 
-        $conn = $this->connect_to_DB(); 
-
-       echo $conn->query( $sql_statement )->fetchColumn(); 
-    }
-
-    // Generic Insert function. Specify table name and the data 
-    // NOTE PHP does not have a way for me to enforce validity check of data 
-    // like React has with type interface, so for now, we will just assume 
-    // the data is good and rely on mySQL rejecting invalid data (hopefully :pray )
-    public function insertIntoTable( string $table, array $data ) {
-        $conn = $this->connect_to_DB(); 
-
+    // Insert a new record into a table
+    public function insertIntoTable(string $table, array $data) {
+        $conn = $this->connect_to_DB();
         try { 
-            $columns = implode(", ", array_keys($data)); // Create a list of the data key 
-            $placeholder = implode(", ", array_fill(0, count($data), "?"));
-
-            $sql = "INSERT INTO $table ($columns) VALUES ($placeholder)";
+            $columns = implode(", ", array_keys($data));
+            $placeholders = implode(", ", array_fill(0, count($data), "?"));
+            $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
 
             $stmt = $conn->prepare($sql);
             $stmt->execute(array_values($data));
 
+            return $conn->lastInsertId(); // Return last inserted ID
         } catch (PDOException $e) {
-            echo "Error when trying to insert into $table: ". $e->getMessage();
-            exit;
+            echo "Error inserting into $table: " . $e->getMessage();
+            return false;
         }
     }
 
+    // Update an existing record in a table
+    public function updateTable(string $table, array $data, array $condition) {
+        $conn = $this->connect_to_DB();
+        try {
+            $set_clause = implode(", ", array_map(fn($key) => "$key = ?", array_keys($data)));
+            $where_clause = implode(" AND ", $condition);
+            $sql = "UPDATE $table SET $set_clause WHERE $where_clause";
 
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(array_values($data));
 
+            return $stmt->rowCount(); // Return number of affected rows
+        } catch (PDOException $e) {
+            echo "Error updating $table: " . $e->getMessage();
+            return false;
+        }
+    }
 
-    // ** Everything below this comment is internal functions by the Database Class functions
+    // Delete a record from a table
+    public function deleteFromTable(string $table, array $condition) {
+        $conn = $this->connect_to_DB();
+        try {
+            $where_clause = implode(" AND ", $condition);
+            $sql = "DELETE FROM $table WHERE $where_clause";
 
-    // Use internally by the other public function inside DatabaseClient. 
-    // Returns a db connection client to do CRUD operation on the DB if succesfully connected
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->rowCount(); // Return number of deleted rows
+        } catch (PDOException $e) {
+            echo "Error deleting from $table: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    // Execute a custom SQL command (For development use only)
+    public function customSQLcommand($sql_statement) { 
+        $conn = $this->connect_to_DB(); 
+        echo $conn->query($sql_statement)->fetchColumn(); 
+    }
+
+    // Internal function to establish a database connection
     private function connect_to_DB() {
-        require  __DIR__ . "/../../config.php"; // import sensitive database credientials 
-        $db_connection_string = "mysql:host=$host;dbname=$db;charset=UTF8"; // Private connection string to the mySQL that specify which database and root user credientials
+        require __DIR__ . "/../../config.php"; // Import database credentials
+        $db_connection_string = "mysql:host=$host;dbname=$db;charset=UTF8";
   
         try { 
-
             $pdo = new PDO($db_connection_string, $user, $password); 
-
-            // $current_db = $pdo->query('SELECT DATABASE()')->fetchColumn();
-            // echo $current_db;
-            
-            // Set the PDO error mode to exception (for better error handling)
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
             return $pdo;
-
-        } catch (PDOException $e){ 
-            echo "Failed to connected to DB: " . $e->getMessage(); 
+        } catch (PDOException $e) { 
+            echo "Failed to connect to DB: " . $e->getMessage(); 
             exit;
         }
     }
-    
-
-
 }
-
 
 ?>
