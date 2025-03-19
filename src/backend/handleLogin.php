@@ -15,8 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
 
     $conn = new DatabaseClient(); 
 
-    echo "testing: "; 
-
     # Since we already filter, we can simply dereference the variable in the string
     $potential_user =$conn->query_all("User", ["Username = '$username'"])->fetch(PDO::FETCH_ASSOC); 
     
@@ -32,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
                 // Normal user - buyer 
                 header("Location: ../frontend/inventory.php");
             } else if ($access_level ==  1) {
-                header("Location: ../frontend/seller.php");  
+                header("Location: ../frontend/inventory.php?Login=1");  
             }else {
                 echo "Not implemented yet!";
             }
@@ -48,7 +46,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
     }
 
 }
-
-
-
 ?>

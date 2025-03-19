@@ -1,6 +1,6 @@
 <?php
 // This file holds the database object that allows php to communicate with the mySQL database 
-// This is an API, so simply use require 'database.php' to import this file and use the Database object to  perform CRUD operation to mySQL database 
+// This is an API, so simply use include_once 'database.php' to import this file and use the Database object to  perform CRUD operation to mySQL database 
 
 
 class DatabaseClient { 

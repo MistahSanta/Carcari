@@ -49,6 +49,8 @@
 
             <input type="submit" name="Login" value="Login">
         </form>
+        <button onclick="location.href='../frontend/signupPage.php'">Sign Up</button>
+
     </div>
 
 </body>

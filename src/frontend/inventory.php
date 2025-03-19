@@ -42,6 +42,7 @@
         padding: 10px;
         margin: 10px;
         width: calc(50% - 45px); /* Adjusted to fit two cards per row */
+        max-height: 50%;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         text-align: left;
         background-color: #fff;
@@ -58,6 +59,14 @@
     }
 </style>
 
+<?php if (isset($_GET['Login']) && $_GET['Login'] == '1'): ?>
+
+    <p style="color: green;"><a href="../frontend/inputForm.php">Sell Cars</a>.</p>
+<?php elseif (isset($_GET['signup']) && $_GET['signup'] == 'error'): ?>
+    <p style="color: red;">Error. Signup was not successful.</p>
+<?php else: ?>
+    <p></p>
+<?php endif; ?>
 
 <!-- PHP only offer full page reload instead of partial page refresh -->
 <!-- Filter tab on the Inventory page -->
