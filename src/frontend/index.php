@@ -18,27 +18,13 @@ ini_set('display_errors', 1);
 <head>
 
 <!-- TODO task for the team 
-        //TODO 1) Add NavBar 
-        2) User login with different access level 
-        3) Add CRUD functionality 
-        4) Add search button 
         5) Add Buy and sell button on Car Card 
 -->
 
 <body>
-    <!-- <nav><a href="inputForm.php">a</a></nav> -->
 
-<!-- Add the Inventory's page into here -->
-<?php //include "inventory.php" ?> 
 <?php include "loginPage.php" ?>
 
-
-
-
-
-
-
-    
 </body>
 </html>
 

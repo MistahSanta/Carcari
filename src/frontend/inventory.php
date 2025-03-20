@@ -2,20 +2,58 @@
 <!-- Inventory Page for Car dealership --> 
 <!-- Style for inventory.php -->
 <style>
-    body {
+    body, html {
+        margin: 0;
+        padding: 0;
+    }
+    .main-container {
         display: flex;
+        flex-direction: row;
         font-family: Arial, sans-serif;
         background-color: #f4f4f9;
-        margin: 0;
-        padding: 20px;
+    }
+    .navbar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+        color: white;
+        font-weight: bold;
+    }
+    .navbar .nav-left {
+        font-size: 1.5em;
+    }
+    ..nav-right {
+        display: flex;
+        gap: 20px;
+    }
+    .navbar .nav-right button {
+        background-color: #555;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+    .navbar .nav-right button:hover {
+        background-color: #777;
     }
     .filter-container {
         width: 20%;
+        max-height:900px;
         padding: 10px;
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 10px;
     }
     .filter {
         margin-bottom: 20px;
@@ -57,6 +95,12 @@
         margin-right: 20px;
         border-radius: 5px;
     }
+    .apply-filter {
+        width:100%;
+        height: 40px;
+        background-color: #007bff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 </style>
 
 <?php if (isset($_GET['Login']) && $_GET['Login'] == '1'): ?>
@@ -67,6 +111,19 @@
 <?php else: ?>
     <p></p>
 <?php endif; ?>
+
+
+<div class="navbar">
+            <div class="nav-left">Carcari</div>
+            <div class="nav-right">
+                <span style="background-color: #3a3a3a; color: white; padding: 10px 15px; border-radius: 5px; font-size: 1em;">Car Inventory List</span>
+                <button onclick="window.location.href='CarInputForm.html'">Car Form</button>
+                <button onclick="window.location.href='maintenance.html'">Maintenance</button>
+                <button onclick="window.location.href='login.html'">Login</button>
+            </div>
+    </div>
+
+<div class="main-container">
 
 <!-- PHP only offer full page reload instead of partial page refresh -->
 <!-- Filter tab on the Inventory page -->
@@ -234,7 +291,7 @@
                     <!-- Add more options as needed -->
                 </select>
             </div>
-            <button type="submit" name="applyFilters">Apply Filters</button>
+            <button type="submit" name="applyFilters" class="apply-filter">Apply Filters</button>
             </form>
 
         </div>
@@ -278,7 +335,6 @@
                     $query_condition[] = "mileage >= '" .  preg_replace('/\W+/', "", $mileage) . "'";
                 } else {
                     // Do regular expression to extract the two numbes we need
-
                     $mileage_range = extractNumbers( $mileage );
                     $query_condition[] = "mileage >= '" . $mileage_range[0] . "'" . " AND mileage <= " . "'" . $mileage_range[1] . "'";
                 }
@@ -344,7 +400,7 @@
         }
     ?>
     </div>
-
+</div>
     
 
 <!-- Helper function -->
@@ -359,3 +415,4 @@
         }
     }
 ?>
+
