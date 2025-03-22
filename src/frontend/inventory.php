@@ -100,6 +100,7 @@
         height: 40px;
         background-color: #007bff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
     }
 </style>
 
@@ -380,9 +381,12 @@
             // Generate the HTML that PHP will spit back to index.php 
             // I wish there was a better way to do this tbh 
             while ( $entry = $car_entities->fetch(PDO::FETCH_ASSOC)) {
+
+                $img_url = $client->query("Image", "Car", ["VIN = '" . $entry["VIN"] . "'"] )->fetch(PDO::FETCH_ASSOC)["Image"];
+                
                 echo "<div class='car-card'>";
                     //echo "<div class='card-image'>";
-                    echo "<img src='https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&height=900&width=1600&fit=bounds' alt='Picture of a car' class='car-image'>";
+                    echo "<img src='$img_url' alt='Picture of a car' class='car-image'>";
                     echo "<div>";
 
                         echo "<h4>"          . htmlspecialchars($entry['Model'])  . "</h4>";

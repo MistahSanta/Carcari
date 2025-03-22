@@ -16,34 +16,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
     $conn = new DatabaseClient(); 
 
     # Since we already filter, we can simply dereference the variable in the string
-    $potential_user =$conn->query_all("User", ["Username = '$username'"])->fetch(PDO::FETCH_ASSOC); 
+    $potential_client =$conn->query_all("Client", ["Username = '$username'"])->fetch(PDO::FETCH_ASSOC); 
+    $potential_seller =$conn->query_all("Seller", ["Username = '$username'"])->fetch(PDO::FETCH_ASSOC); 
     
-    if ($potential_user) {
+    if ($potential_client ) {
         // Found a potential user 
         // TODO stretch code - add hash password for better security 
-        if( $password == $potential_user["Password"]) {
-            
+        if( $password == $potential_client["Password"]) {
             // Perfect, the user is now log in, so redirect them to the correct page
             // with their correct user access level 
-            $access_level = $potential_user["Role"];
-            if ($access_level == 0) {
-                // Normal user - buyer 
-                header("Location: ../frontend/inventory.php");
-            } else if ($access_level ==  1) {
-                header("Location: ../frontend/inventory.php?Login=1");  
-            }else {
-                echo "Not implemented yet!";
-            }
-
-        } else {
+            header("Location: ../frontend/inventory.php?Login=failed");  
+        }
+        else {
             // Incorrect password 
             // TODO add a retry feature -stretch goal 
             echo "Login failed: Incorrect password";
         }
+   
+    } else if ($potential_seller) {
+
+        if( $password == $potential_seller["Password"]) {
+            header("Location: ../frontend/inventory.php?Login=1");  
+        } else { 
+            header("Location: ../frontend/index.php?Login=failed");  
+        }
+   
     } else { // NO user found - This is not safe it is easy for hackers guess password once they know the username is valid 
         echo "Login failed:  No User found. Did you typed in the right username?"; 
-        // TODO add a retry feature - stretch goal 
     }
-
 }
 ?>

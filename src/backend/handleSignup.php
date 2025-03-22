@@ -14,22 +14,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Signup'])) {
 
     $conn = new DatabaseClient(); 
 
+    # Grab the access level the user wants 
+    $access_level = htmlspecialchars(stripslashes(trim($_POST["access-level"])));    
+
     # Since we already filter, we can simply dereference the variable in the string
-    $potential_user =$conn->query_all("User", ["Username = '$username'"])->fetch(PDO::FETCH_ASSOC); 
+    $potential_user =$conn->query_all( $access_level, ["Username = '$username'"])->fetch(PDO::FETCH_ASSOC); 
     
     if (! $potential_user) {
-        
-        # Grab the access level the user wants 
-        $access_level = htmlspecialchars(stripslashes(trim($_POST["access-level"])));   
-
         $data = [
             "Username" => $username,
             "Password" => $password,
-            "Role"     => $access_level,
         ];
 
         // add the new user credientials to the database 
-        $conn->insertIntoTable("User", $data );
+        $conn->insertIntoTable( $access_level, $data );
 
         // Successfully signed up 
         header("Location: ../frontend/signupPage.php?signup=success");
