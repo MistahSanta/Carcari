@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
         }
    
     } else { // NO user found - This is not safe it is easy for hackers guess password once they know the username is valid 
-        echo "Login failed:  No User found. Did you typed in the right username?"; 
+        header("Location: ../frontend/index.php?Login=failed");  
     }
 }
 ?>

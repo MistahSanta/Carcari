@@ -61,13 +61,13 @@
     .filter label {
         display: block;
         margin-bottom: 5px;
-        font-weight: bold;
-    }
+        font-weight: bold;    }
     .filter input, .filter select {
         width: 100%;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        
     }
     .car-list {
         width: 80%;
@@ -80,18 +80,19 @@
         padding: 10px;
         margin: 10px;
         width: calc(50% - 45px); /* Adjusted to fit two cards per row */
-        max-height: 50%;
+        max-height: 300px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         text-align: left;
         background-color: #fff;
         display: flex;
+
     }
     .car-image {
         width: auto; /* Adjusted the image size */
         height: 250px;
         margin-left: 0px;
-        margin-top: 0px;
-        margin-bottom: 0px;
+        margin-top: auto;
+        margin-bottom: auto;
         margin-right: 20px;
         border-radius: 5px;
     }
@@ -99,28 +100,20 @@
         width:100%;
         height: 40px;
         background-color: #007bff;
+        color: white;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
     }
 </style>
 
-<?php if (isset($_GET['Login']) && $_GET['Login'] == '1'): ?>
-
-    <p style="color: green;"><a href="../frontend/inputForm.php">Sell Cars</a>.</p>
-<?php elseif (isset($_GET['signup']) && $_GET['signup'] == 'error'): ?>
-    <p style="color: red;">Error. Signup was not successful.</p>
-<?php else: ?>
-    <p></p>
-<?php endif; ?>
-
-
 <div class="navbar">
             <div class="nav-left">Carcari</div>
             <div class="nav-right">
                 <span style="background-color: #3a3a3a; color: white; padding: 10px 15px; border-radius: 5px; font-size: 1em;">Car Inventory List</span>
-                <button onclick="window.location.href='CarInputForm.html'">Car Form</button>
-                <button onclick="window.location.href='maintenance.html'">Maintenance</button>
-                <button onclick="window.location.href='login.html'">Login</button>
+                <?php if (isset($_GET['Login']) && $_GET['Login'] == '1'): ?>
+                    <button onclick="window.location.href='inputForm.php'">Sell Car</button>
+                <?php endif; ?> 
+                <button onclick="window.location.href='index.php'">Logout</button>
             </div>
     </div>
 
@@ -288,7 +281,10 @@
                 <select id="condition" name="condition">
                     <option value="">Select Condition</option>
                     <option value="New">New</option>
-                    <option value="Used">Used</option>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Good">Good</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Poor">Poor</option>
                     <!-- Add more options as needed -->
                 </select>
             </div>
@@ -348,24 +344,24 @@
                     $query_condition[] = "year = '" . $year . "'";
                 }
             }
-            // if (!empty($drivetrain)) {
-            //     $query_condition[] = "drivetrain = '" . $drivetrain . "'";
-            // }
+            if (!empty($drivetrain)) {
+                $query_condition[] = "drivetrain = '" . $drivetrain . "'";
+            }
             if (!empty($manufacturer)) {
                 $query_condition[] = "make = '" . $manufacturer . "'";
             }
-            // if (!empty($body_style)) {
-            //     $query_condition[] = "body_style = '" . $body_style . "'";
-            // }
-            // if (!empty($fuel_type)) {
-            //     $query_condition[] = "fuel_type = '" . $fuel_type . "'";
-            // }
+            if (!empty($body_style)) {
+                $query_condition[] = "body_style = '" . $body_style . "'";
+            }
+            if (!empty($fuel_type)) {
+                $query_condition[] = "fuel_type = '" . $fuel_type . "'";
+            }
             if (!empty($color)) {
                 $query_condition[] = "color = '" . $color . "'";
             }
-            // if (!empty($transmission)) {
-            //     $query_condition[] = "transmission = '" . $transmission . "'";
-            // }
+            if (!empty($transmission)) {
+                $query_condition[] = "transmission = '" . $transmission . "'";
+            }
             if (!empty($condition)) {
                 $query_condition[] = "operational_condition = '" . $condition . "'";
             }
@@ -388,13 +384,15 @@
                     //echo "<div class='card-image'>";
                     echo "<img src='$img_url' alt='Picture of a car' class='car-image'>";
                     echo "<div>";
-
-                        echo "<h4>"          . htmlspecialchars($entry['Model'])  . "</h4>";
-                        echo "<p> Price: "   . htmlspecialchars($entry['Price'])  . "</p>";
-                        echo "<p> Year: "    . htmlspecialchars($entry['Year'])   . "</p>";
+                        echo "<h4>"     .  htmlspecialchars($entry['Year']) . " " . htmlspecialchars($entry['Manufacturer']) . " ". htmlspecialchars($entry['Model'])  . "</h4>";
+                        echo "<p> Price: $"   . htmlspecialchars($entry['Price'])  . "</p>";
                         echo "<p> Mileage: " . htmlspecialchars($entry['Mileage']) . "</p>";
-                        echo "<p> Color: "   . htmlspecialchars($entry['Color']) . "</p>";
-                        echo "<p> More Stuff: Haven't implemented in database yet! </p>";
+                        echo "<p> Drivetrain: "   . htmlspecialchars($entry['Drivetrain']) . "</p>";
+                        echo "<p> Fuel Type: "   . htmlspecialchars($entry['Fuel_type']) . "</p>";
+                        echo "<p> Body Style: "   . htmlspecialchars($entry['Body_Style']) . "</p>";
+                        echo "<p> Transmission: "   . htmlspecialchars($entry['Transmission']) . "</p>";
+                        echo "<p> Condition: "   . htmlspecialchars($entry['Operational_Condition']) . "</p>";
+     
                     
                     //echo "<p> : " . htmlspecialchars($entry['Milage']) . "</p>";
                     //echo "<p> Mileage: " . htmlspecialchars($entry['Milage']) . "</p>";
