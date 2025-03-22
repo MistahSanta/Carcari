@@ -1,21 +1,21 @@
-VIN,Color,Engine,Make,Model,Year,Trim,Price,Mileage
-YSMEG3KA2PL112904,White,Electric,Polestar,2,2023,Long Range Dual Motor," $32,960.00 ",4776
-KNDC5DLE1P5119220,Black,Electric,Kia,EV6,2023,GT," $36,981.00 ",14107
-5YJ3E1EB7RF790068,Gray,Electric,Tesla,Model 3,2024,Long Range," $36,985.00 ",8731
-JF1ZNBE11P9761895,Blue,4 Cyl 2.4 L,Toyota,GR86,2023,Premium," $26,990.00 ",33824
-W1K7X8JB8MA037926,White,8 Cyl 4.0 L,Mercedes-Benz,AMG GT 63,2021,4MATIC," $79,500.00 ",47621
-WP0AD2A94RS252692,White,6 Cyl 3.8 L,Porsche,911,2024,Turbo S," $279,992.00 ",7
-19UDE5G99RA001158,Blue,4 Cyl 2.0 L,Acura,Integra,2024,Type S," $47,677.00 ",7726
-JHMFL5G41RX000146,White,4 Cyl 2.0 L,Honda,Civic,2024,Type R," $43,180.00 ",7598
-KMTG34TA9NU086346,Red,4 Cyl 2.0 L,Genesis,G70,2022,2.0T," $28,989.00 ",7862
-1FTEW1CG3GFB94274,Red,6 Cyl 3.5 L,Ford,F-150,2016,Lariat," $17,499.00 ",138274
-WA1EAAFY6S2037495,White,4 Cyl 2.0 L,Audi,Q5,2025,Premium Plus 45," $60,200.00 ",0
-1C4RDHDG1SC526785,Silver,6 Cyl 3.6 L,Dodge,Durango,2025,GT," $37,540.00 ",0
-7PDSGABL4NN000989,Green,Electric,Rivian,R1S,2022,Launch Edition," $67,000.00 ",23750
-WZ1DB2C01NW047496,Silver,4 Cyl 2.0 L,Toyota,Supra,2022,Base," $36,999.00 ",20400
-WBSJF0C04LCD42404,White,8 Cyl 4.4 L,BMW,M5,2020,Standard," $49,999.00 ",38600
-ZFF67NFA0C0182985,Silver,8 Cyl 4.5 L,Ferrari,458,2012,Italia," $185,000.00 ",23560
-SBM14RCAXMW765342,White,8 Cyl 4.0 L,McLaren,765LT,2021,Coupe," $434,991.00 ",11605
-1FAGP8FFXR5141412,Blue,8 Cyl 5.0 L,Ford,Mustang,2024,GT Premium," $57,338.00 ",0
-YV4L12WCXP2106281,White,4 Cyl 2.0 L,Volvo,V60,2023,B5 Ultimate," $43,481.00 ",11655
-JTHE9JBH7M2036930,Blue,4 Cyl 2.0 L,Lexus,UX,2021,250h F Sport," $27,498.00 ",41981
+VIN,Manufacturer,Model,Year,Price,Mileage,Color,Drivetrain,Fuel Type,Body Style,Transmission,Image
+YSMEG3KA2PL112904,Polestar,2,2023,32960,4776,White,AWD,Electric,Sedan,Automatic,assets/Polestar2.webp
+KNDC5DLE1P5119220,Kia,EV6 GT,2023,36981,14107,Black,AWD,Electric,SUV,Automatic,assets/KiaEV6GT.webp
+5YJ3E1EB7RF790068,Tesla,Model 3 Long Range,2024,36985,8731,Gray,AWD,Electric,Sedan,Automatic,assets/TeslaM3LR.webp
+JF1ZNBE11P9761895,Toyota,GR86 Premium,2023,26990,33824,Blue,RWD,Gasoline,Coupe,Manual,assets/GR86P.webp
+W1K7X8JB8MA037926,Mercedes-Benz,AMG GT 63,2021,79500,47621,White,AWD,Gasoline,Coupe,Automatic,assets/MBGT63.webp
+WP0AD2A94RS252692,Porsche,911 Turbo S,2024,279992,7,White,AWD,Gasoline,Coupe,Automatic,assets/911TurboS.webp
+19UDE5G99RA001158,Acura,Integra Type S,2024,47677,7726,Blue,FWD,Gasoline,Hatchback,Manual,assets/AcuraTypeS.webp
+JHMFL5G41RX000146,Honda,Civic Type R,2024,46180,7598,White,FWD,Gasoline,Hatchback,Manual,assets/HondaTypeR.webp
+KMTG34TA9NU086346,Genesis,G70,2022,28989,7862,Red,RWD,Gasoline,Sedan,Automatic,assets/GenesisG70.webp
+1FTEW1CG3GFB94274,Ford,F-150 Lariat,2016,17499,138274,Red,RWD,Gasoline,Truck,Automatic,assets/Ford150.webp
+WA1EAAFY6S2037495,Audi,Q5 Premium Plus 45,2025,60200,0,White,AWD,Gasoline,SUV,Automatic,assets/AudiQ5.webp
+1C4RDHDG1SC526785,Dodge,Durango GT,2025,37540,0,Silver,RWD,Gasoline,SUV,Automatic,assets/DodgeDGT.webp
+7PDSGABL4NN000989,Rivian,R1S Launch Edition,2022,67000,23750,Green,AWD,Electric,SUV,Automatic,assets/RivianR1S.webp
+WZ1DB2C01NW047496,Toyota,GR Supra Base,2022,36999,20400,Silver,RWD,Gasoline,Coupe,Automatic,assets/ToyotaSupra.webp
+WBSJF0C04LCD42404,BMW,M5,2020,49999,38600,White,AWD,Gasoline,Sedan,Automatic,assets/BMWM5.webp
+ZFF67NFA0C0182985,Ferrari,458 Italia,2012,185000,23560,Silver,RWD,Gasoline,Coupe,Automatic,assets/Ferrari458.webp
+SBM14RCAXMW765342,McLaren,765LT,2021,434991,11605,White,RWD,Gasoline,Coupe,Automatic,assets/McLaren765LT.webp
+1FAGP8FFXR5141412,Ford,Mustang GT Premium,2024,57338,0,Blue,RWD,Gasoline,Convertible,Automatic,assets/FordMustang.webp
+YV4L12WCXP2106281,Volvo,V60 B5 Ultimate,2023,43481,11665,White,AWD,Gasoline,Wagon,Automatic,assets/VolvoV60.webp
+JTHE9JBH7M2036930,Lexus,UX 250h F Sport,2021,27498,41981,Blue,AWD,Hybrid,Crossover,Automatic,assets/LexusUX.webp

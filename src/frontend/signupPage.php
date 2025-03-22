@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,6 +86,42 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #333;
+        }
+
+        /* Sign-up Success/Error Messages */
+        .form-container p.success {
+            color: green;
+        }
+
+        .form-container p.error {
+            color: red;
+        }
+
+        /* Copyright Section */
+        .copyright-container {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 500px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .form-container h2 {
+                font-size: 24px;
+            }
+        }
+
             transition: background-color 0.3s ease;
         }
 
