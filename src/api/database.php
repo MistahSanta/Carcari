@@ -2,7 +2,6 @@
 // This file holds the database object that allows php to communicate with the mySQL database 
 // This is an API, so simply use include_once 'database.php' to import this file and use the Database object to  perform CRUD operation to mySQL database 
 
-
 class DatabaseClient { 
     
     // Retrieve all records from a table, optionally filtering by conditions
@@ -14,14 +13,12 @@ class DatabaseClient {
             $sql = is_null($condition) ? "SELECT * FROM $table"
                                        : "SELECT * FROM $table WHERE " . implode(" AND ", $condition);
             
-            //echo "SQL Statement: $sql\n\n"; //debugging 
-            
-            $sql_stmt = $conn->query( $sql );
+            $sql_stmt = $conn->query($sql);
 
             if ($sql_stmt == false) { 
-                throw new Exception("Query failed! " . $conn->errorInfo() );
+                throw new Exception("Query failed! " . $conn->errorInfo());
             }
-            return $sql_stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $sql_stmt; // Avoiding fetchAll to allow flexibility in user fetching
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return false;
@@ -42,7 +39,7 @@ class DatabaseClient {
             if ($sql_stmt === false) { 
                 throw new Exception("Query failed! " . implode(", ", $conn->errorInfo()));
             }
-            return $sql_stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $sql_stmt; // Avoiding fetchAll for flexibility
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return false;
@@ -123,5 +120,4 @@ class DatabaseClient {
         }
     }
 }
-
 ?>
