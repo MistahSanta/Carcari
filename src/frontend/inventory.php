@@ -113,6 +113,7 @@
                 <?php if (isset($_GET['Login']) && $_GET['Login'] == '1'): ?>
                     <button onclick="window.location.href='inputForm.php'">Sell Car</button>
                 <?php endif; ?> 
+                <button onclick="window.location.href='orderPage.php'">View Order</button>
                 <button onclick="window.location.href='index.php'">Logout</button>
             </div>
     </div>
@@ -393,9 +394,6 @@
                         echo "<p> Transmission: "   . htmlspecialchars($entry['Transmission']) . "</p>";
                         echo "<p> Condition: "   . htmlspecialchars($entry['Operational_Condition']) . "</p>";
      
-                    
-                    //echo "<p> : " . htmlspecialchars($entry['Milage']) . "</p>";
-                    //echo "<p> Mileage: " . htmlspecialchars($entry['Milage']) . "</p>";
                     echo "</div>";
                 echo "</div>";
             }
