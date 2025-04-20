@@ -182,6 +182,7 @@
                 const currentDate = new Date();
                 filteredOrders = filteredOrders.filter(order => {
                     const orderDate = new Date(order.date);
+                    
                     if (timePeriod === 'pastMonth') {
                         return currentDate - orderDate <= 30 * 24 * 60 * 60 * 1000; // Past month filter
                     } else if (timePeriod === 'pastYear') {
