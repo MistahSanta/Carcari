@@ -28,7 +28,7 @@
     .navbar .nav-left {
         font-size: 1.5em;
     }
-    ..nav-right {
+    .nav-right {
         display: flex;
         gap: 20px;
     }
@@ -73,6 +73,8 @@
         width: 80%;
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between; 
+        align-items: stretch;
     }
     .car-card {
         border: 1px solid #ccc;
@@ -80,12 +82,12 @@
         padding: 10px;
         margin: 10px;
         width: calc(50% - 45px); /* Adjusted to fit two cards per row */
+        min-height: 320px;
         max-height: 300px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         text-align: left;
         background-color: #fff;
         display: flex;
-
     }
     .car-image {
         width: auto; /* Adjusted the image size */
@@ -105,6 +107,8 @@
         border-radius: 5px;
     }
 </style>
+
+
 
 <div class="navbar">
             <div class="nav-left">Carcari</div>
@@ -297,6 +301,32 @@
     <div class="car-list">
     <!-- Dynamically load the Car's Card from the mySQL Database -->
     <?php
+        // Redirect if needed
+        if (isset($_GET['delete']) && $_GET['delete'] === 'success') {
+            header("Location: inventory.php?Login=1&deleted=1");
+            exit;
+        }
+        if (isset($_GET['update']) && $_GET['update'] === 'success') {
+            header("Location: inventory.php?Login=1&updated=1");
+            die('redirecting...'); // confirm this hits
+            exit;
+        }
+
+        // Show messages then auto-clean the URL (but don't exit, let rest of page render)
+        if (isset($_GET['deleted']) && $_GET['deleted'] === '1') {
+            echo "<p style='color: green;'>Car deleted successfully.</p>";
+            echo "<meta http-equiv='refresh' content='2;url=inventory.php?Login=1'>";
+        }
+        if (isset($_GET['updated']) && $_GET['updated'] === '1') {
+            echo "<p style='color: green;'>Car updated successfully.</p>";
+            echo "<meta http-equiv='refresh' content='2;url=inventory.php?Login=1'>";
+        }
+
+
+        
+
+
+
         include_once  __DIR__ . '/../api/database.php';
         // First, grab the Car entities from the Database
         $client = new  DatabaseClient();  
@@ -363,9 +393,9 @@
             if (!empty($transmission)) {
                 $query_condition[] = "transmission = '" . $transmission . "'";
             }
-            if (!empty($condition)) {
-                $query_condition[] = "operational_condition = '" . $condition . "'";
-            }
+            //if (!empty($condition)) {
+                //$query_condition[] = "operational_condition = '" . $condition . "'";
+            //}
         }
 
     
@@ -379,20 +409,65 @@
             // I wish there was a better way to do this tbh 
             while ( $entry = $car_entities->fetch(PDO::FETCH_ASSOC)) {
 
+
+                // Compute condition manually (since Operational_Condition is a generated column)
+                $mileage = (int) $entry['Mileage'];
+                if ($mileage === 0) {
+                $computed_condition = 'New';
+                } elseif ($mileage < 30000) {
+                $computed_condition = 'Excellent';
+                } elseif ($mileage < 70000) {
+                $computed_condition = 'Good';
+                } elseif ($mileage < 100000) {
+                $computed_condition = 'Fair';
+                } else {
+                $computed_condition = 'Poor';
+                }
+
+                // Skip this car if user filtered by condition and it doesn't match
+                if (!empty($condition) && $condition !== $computed_condition) {
+                continue;
+                }
+
+
                 $img_url = $client->query("Image", "Car", ["VIN = '" . $entry["VIN"] . "'"] )->fetch(PDO::FETCH_ASSOC)["Image"];
                 
                 echo "<div class='car-card'>";
                     //echo "<div class='card-image'>";
                     echo "<img src='$img_url' alt='Picture of a car' class='car-image'>";
-                    echo "<div>";
+                    //echo "<div style='display: flex; flex-direction: column; gap: 10px;'>";
+                    echo "<div class = 'car-details'>";
+                    //echo "<div>";
                         echo "<h4>"     .  htmlspecialchars($entry['Year']) . " " . htmlspecialchars($entry['Manufacturer']) . " ". htmlspecialchars($entry['Model'])  . "</h4>";
                         echo "<p> Price: $"   . htmlspecialchars($entry['Price'])  . "</p>";
                         echo "<p> Mileage: " . htmlspecialchars($entry['Mileage']) . "</p>";
                         echo "<p> Drivetrain: "   . htmlspecialchars($entry['Drivetrain']) . "</p>";
-                        echo "<p> Fuel Type: "   . htmlspecialchars($entry['Fuel_type']) . "</p>";
+                        echo "<p> Fuel Type: "   . htmlspecialchars($entry['Fuel_Type']) . "</p>";
                         echo "<p> Body Style: "   . htmlspecialchars($entry['Body_Style']) . "</p>";
                         echo "<p> Transmission: "   . htmlspecialchars($entry['Transmission']) . "</p>";
-                        echo "<p> Condition: "   . htmlspecialchars($entry['Operational_Condition']) . "</p>";
+                        echo "<p> Condition: " . htmlspecialchars($computed_condition) . "</p>";
+
+
+                        //displaying the buttons
+                        if (isset($_GET['Login']) && $_GET['Login'] == '1') {
+                            // Wrap both buttons side-by-side
+                            echo "<div style='margin-top: 10px; display: flex; gap: 10px;'>";
+                        
+                            // Delete button
+                            echo "<form method='POST' action='../backend/deleteCar.php' onsubmit='return confirm(\"Are you sure you want to delete this car?\");'>";
+                            echo "<input type='hidden' name='vin' value='" . htmlspecialchars($entry['VIN']) . "' />";
+                            echo "<input type='submit' value='Delete Car' style='background-color:red; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;' />";
+                            echo "</form>";
+                        
+                            // Edit button
+                            echo "<form method='GET' action='edit_car.php'>";
+                            echo "<input type='hidden' name='id' value='" . htmlspecialchars($entry['VIN']) . "' />";
+                            echo "<button type='submit' style='background-color:#ffc107; color:white; padding:5px 10px; border:none; border-radius:5px; cursor:pointer;'>Edit</button>";
+                            echo "</form>";
+                        
+                            echo "</div>"; // close button container
+                        }
+                        
      
                     echo "</div>";
                 echo "</div>";

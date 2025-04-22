@@ -88,6 +88,12 @@ class DatabaseClient {
         }
     }
 
+    //enables deletion of a car
+    public function customPDO() {
+        return $this->connect_to_DB();
+    }
+    
+
 
 
 

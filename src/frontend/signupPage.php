@@ -86,9 +86,6 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
         .form-container input[type="submit"]:hover {
             background-color: #333;
         }
@@ -122,7 +119,6 @@
             }
         }
 
-            transition: background-color 0.3s ease;
         }
 
         .form-container input[type="submit"]:hover {
