@@ -31,7 +31,7 @@ $fuel_type   = "Gasoline"; // Hardcoded unless form includes it
 $drivetrain  = "FWD";      // Hardcoded unless form includes it
 $body_style  = "Sedan";    // Hardcoded unless form includes it
 $transmission= "Automatic"; // Hardcoded unless form includes it
-$image       = "assets/placeholder.jpg"; // Default placeholder
+$image = "../frontend/assets/Camry2004.jpg"; // for backend reference
 $sold        = 0; // New listing is not sold
 
 $db = new DatabaseClient();

@@ -486,13 +486,13 @@
                             // Delete button
                             echo "<form method='POST' action='../backend/deleteCar.php' onsubmit='return confirm(\"Are you sure you want to delete this car?\");'>";
                             echo "<input type='hidden' name='vin' value='" . htmlspecialchars($entry['VIN']) . "' />";
-                            echo "<input type='submit' value='Delete Car' style='background-color:red; color:white; border:none; padding:5px 50px; border-radius:5px; cursor:pointer;' />";
+                            echo "<input type='submit' value='Delete Car' style='background-color:red; color:white; width:150px; border:none; padding:5px 50px; border-radius:5px; cursor:pointer;' />";
                             echo "</form>";
                         
                             // Edit button
                             echo "<form method='GET' action='edit_car.php'>";
                             echo "<input type='hidden' name='id' value='" . htmlspecialchars($entry['VIN']) . "' />";
-                            echo "<button type='submit' style='background-color:#ffc107; color:white; padding:5px 70px; border:none; border-radius:5px; cursor:pointer;'>Edit</button>";
+                            echo "<button type='submit' style='background-color:#ffc107; color:white; width:150px; padding:5px 50px; border:none; border-radius:5px; cursor:pointer;'>Edit</button>";
                             echo "</form>";
                         
                             echo "</div>"; // close button container
