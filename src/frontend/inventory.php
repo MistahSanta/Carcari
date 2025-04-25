@@ -312,6 +312,18 @@
             exit;
         }
 
+        // Redirect after a car is bought to show clean URL
+        if (isset($_GET['buy']) && $_GET['buy'] === 'success') {
+            header("Location: inventory.php?Login=0&bought=1");
+            exit;
+        }
+
+        // Show message after redirect
+        if (isset($_GET['bought']) && $_GET['bought'] === '1') {
+            echo "<p style='color: green;'>Car purchased successfully.</p>";
+            echo "<meta http-equiv='refresh' content='2;url=inventory.php?Login=0'>";
+        }
+
         // Show messages then auto-clean the URL (but don't exit, let rest of page render)
         if (isset($_GET['deleted']) && $_GET['deleted'] === '1') {
             echo "<p style='color: green;'>Car deleted successfully.</p>";
@@ -321,16 +333,17 @@
             echo "<p style='color: green;'>Car updated successfully.</p>";
             echo "<meta http-equiv='refresh' content='2;url=inventory.php?Login=1'>";
         }
-
-
         
-
-
-
         include_once  __DIR__ . '/../api/database.php';
         // First, grab the Car entities from the Database
         $client = new  DatabaseClient();  
         $query_condition = null; 
+
+        if (!isset($_GET['applyFilters']) && isset($_GET['Login']) && $_GET['Login'] === '0') {
+            $query_condition = []; // Let it default to showing all cars
+        }
+        
+        
 
         if (isset($_GET['applyFilters'])) {
             // Submit button was pressed, so take those value and apply them 
@@ -398,8 +411,16 @@
             //}
         }
 
-    
+        // Always exclude sold cars
+        $query_condition[] = "Sold = 0";
+
         $car_entities = $client->query_all("Car", $query_condition ); // Select Everything from Car Table 
+        
+
+        if (!$car_entities || $car_entities->rowCount() === 0) {
+            echo "<p style='color: red;'>No car entries found (query may be malformed).</p>";
+        }
+        
 
 
         // Now we have the car entries, so display them on the card, so 
@@ -442,7 +463,7 @@
                         echo "<p> Price: $"   . htmlspecialchars($entry['Price'])  . "</p>";
                         echo "<p> Mileage: " . htmlspecialchars($entry['Mileage']) . "</p>";
                         echo "<p> Drivetrain: "   . htmlspecialchars($entry['Drivetrain']) . "</p>";
-                        echo "<p> Fuel Type: "   . htmlspecialchars($entry['Fuel_Type']) . "</p>";
+                        echo "<p> Fuel Type: "   . htmlspecialchars($entry['Fuel_type']) . "</p>";
                         echo "<p> Body Style: "   . htmlspecialchars($entry['Body_Style']) . "</p>";
                         echo "<p> Transmission: "   . htmlspecialchars($entry['Transmission']) . "</p>";
                         echo "<p> Condition: " . htmlspecialchars($computed_condition) . "</p>";
@@ -467,7 +488,17 @@
                         
                             echo "</div>"; // close button container
                         }
-                        
+
+                        // Display BUY button if user is NOT a seller
+                        // Buyer view — show Buy button
+                        if (isset($_GET['Login']) && $_GET['Login'] == '0') {
+                            echo "<form method='POST' action='../backend/buyCar.php'>";
+                            echo "<input type='hidden' name='vin' value='" . htmlspecialchars($entry['VIN']) . "' />";
+                            echo "<input type='hidden' name='customer_id' value='10099946' />"; // temp until dynamic ID
+                            echo "<button type='submit' style='margin-top:10px; background-color:green; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;'>Buy</button>";
+                            echo "</form>";
+                        }
+
      
                     echo "</div>";
                 echo "</div>";

@@ -103,8 +103,9 @@ class DatabaseClient {
     // Returns a db connection client to do CRUD operation on the DB if succesfully connected
     private function connect_to_DB() {
         require  __DIR__ . "/../../config.php"; // import sensitive database credientials 
+
         $db_connection_string = "mysql:host=$host;dbname=$db;charset=UTF8"; // Private connection string to the mySQL that specify which database and root user credientials
-  
+        
         try { 
 
             $pdo = new PDO($db_connection_string, $user, $password); 

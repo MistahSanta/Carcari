@@ -1,21 +1,21 @@
-VIN,Manufacturer,Model,Year,Price,Mileage,Color,Drivetrain,Fuel Type,Body Style,Transmission,Image
-YSMEG3KA2PL112904,Polestar,2,2023,32960,4776,White,AWD,Electric,Sedan,Automatic,assets/Polestar2.webp
-KNDC5DLE1P5119220,Kia,EV6 GT,2023,36981,14107,Black,AWD,Electric,SUV,Automatic,assets/KiaEV6GT.webp
-5YJ3E1EB7RF790068,Tesla,Model 3 Long Range,2024,36985,8731,Gray,AWD,Electric,Sedan,Automatic,assets/TeslaM3LR.webp
-JF1ZNBE11P9761895,Toyota,GR86 Premium,2023,26990,33824,Blue,RWD,Gasoline,Coupe,Manual,assets/GR86P.webp
-W1K7X8JB8MA037926,Mercedes-Benz,AMG GT 63,2021,79500,47621,White,AWD,Gasoline,Coupe,Automatic,assets/MBGT63.webp
-WP0AD2A94RS252692,Porsche,911 Turbo S,2024,279992,7,White,AWD,Gasoline,Coupe,Automatic,assets/911TurboS.webp
-19UDE5G99RA001158,Acura,Integra Type S,2024,47677,7726,Blue,FWD,Gasoline,Hatchback,Manual,assets/AcuraTypeS.webp
-JHMFL5G41RX000146,Honda,Civic Type R,2024,46180,7598,White,FWD,Gasoline,Hatchback,Manual,assets/HondaTypeR.webp
-KMTG34TA9NU086346,Genesis,G70,2022,28989,7862,Red,RWD,Gasoline,Sedan,Automatic,assets/GenesisG70.webp
-1FTEW1CG3GFB94274,Ford,F-150 Lariat,2016,17499,138274,Red,RWD,Gasoline,Truck,Automatic,assets/Ford150.webp
-WA1EAAFY6S2037495,Audi,Q5 Premium Plus 45,2025,60200,0,White,AWD,Gasoline,SUV,Automatic,assets/AudiQ5.webp
-1C4RDHDG1SC526785,Dodge,Durango GT,2025,37540,0,Silver,RWD,Gasoline,SUV,Automatic,assets/DodgeDGT.webp
-7PDSGABL4NN000989,Rivian,R1S Launch Edition,2022,67000,23750,Green,AWD,Electric,SUV,Automatic,assets/RivianR1S.webp
-WZ1DB2C01NW047496,Toyota,GR Supra Base,2022,36999,20400,Silver,RWD,Gasoline,Coupe,Automatic,assets/ToyotaSupra.webp
-WBSJF0C04LCD42404,BMW,M5,2020,49999,38600,White,AWD,Gasoline,Sedan,Automatic,assets/BMWM5.webp
-ZFF67NFA0C0182985,Ferrari,458 Italia,2012,185000,23560,Silver,RWD,Gasoline,Coupe,Automatic,assets/Ferrari458.webp
-SBM14RCAXMW765342,McLaren,765LT,2021,434991,11605,White,RWD,Gasoline,Coupe,Automatic,assets/McLaren765LT.webp
-1FAGP8FFXR5141412,Ford,Mustang GT Premium,2024,57338,0,Blue,RWD,Gasoline,Convertible,Automatic,assets/FordMustang.webp
-YV4L12WCXP2106281,Volvo,V60 B5 Ultimate,2023,43481,11665,White,AWD,Gasoline,Wagon,Automatic,assets/VolvoV60.webp
-JTHE9JBH7M2036930,Lexus,UX 250h F Sport,2021,27498,41981,Blue,AWD,Hybrid,Crossover,Automatic,assets/LexusUX.webp
+VIN,Manufacturer,Model,Year,Price,Mileage,Color,Drivetrain,Fuel_type,Body_Style,Transmission,Image,SellerID
+YSMEG3KA2PL112904,Polestar,2,2023,32960,4776,White,AWD,Electric,Sedan,Automatic,assets/Polestar2.webp,20090569
+KNDC5DLE1P5119220,Kia,EV6 GT,2023,36981,14107,Black,AWD,Electric,SUV,Automatic,assets/KiaEV6GT.webp,20089127
+5YJ3E1EB7RF790068,Tesla,Model 3 Long Range,2024,36985,8731,Gray,AWD,Electric,Sedan,Automatic,assets/TeslaM3LR.webp,20099669
+JF1ZNBE11P9761895,Toyota,GR86 Premium,2023,26990,33824,Blue,RWD,Gasoline,Coupe,Manual,assets/GR86P.webp,20019675
+W1K7X8JB8MA037926,Mercedes-Benz,AMG GT 63,2021,79500,47621,White,AWD,Gasoline,Coupe,Automatic,assets/MBGT63.webp,20019675
+WP0AD2A94RS252692,Porsche,911 Turbo S,2024,279992,7,White,AWD,Gasoline,Coupe,Automatic,assets/911TurboS.webp,20089127
+19UDE5G99RA001158,Acura,Integra Type S,2024,47677,7726,Blue,FWD,Gasoline,Hatchback,Manual,assets/AcuraTypeS.webp,20080081
+JHMFL5G41RX000146,Honda,Civic Type R,2024,46180,7598,White,FWD,Gasoline,Hatchback,Manual,assets/HondaTypeR.webp,20090569
+KMTG34TA9NU086346,Genesis,G70,2022,28989,7862,Red,RWD,Gasoline,Sedan,Automatic,assets/GenesisG70.webp,20080081
+1FTEW1CG3GFB94274,Ford,F-150 Lariat,2016,17499,138274,Red,RWD,Gasoline,Truck,Automatic,assets/Ford150.webp,20090569
+WA1EAAFY6S2037495,Audi,Q5 Premium Plus 45,2025,60200,0,White,AWD,Gasoline,SUV,Automatic,assets/AudiQ5.webp,20012345
+1C4RDHDG1SC526785,Dodge,Durango GT,2025,37540,0,Silver,RWD,Gasoline,SUV,Automatic,assets/DodgeDGT.webp,20089127
+7PDSGABL4NN000989,Rivian,R1S Launch Edition,2022,67000,23750,Green,AWD,Electric,SUV,Automatic,assets/RivianR1S.webp,20019675
+WZ1DB2C01NW047496,Toyota,GR Supra Base,2022,36999,20400,Silver,RWD,Gasoline,Coupe,Automatic,assets/ToyotaSupra.webp,20080081
+WBSJF0C04LCD42404,BMW,M5,2020,49999,38600,White,AWD,Gasoline,Sedan,Automatic,assets/BMWM5.webp,20099669
+ZFF67NFA0C0182985,Ferrari,458 Italia,2012,185000,23560,Silver,RWD,Gasoline,Coupe,Automatic,assets/Ferrari458.webp,20071981
+SBM14RCAXMW765342,McLaren,765LT,2021,434991,11605,White,RWD,Gasoline,Coupe,Automatic,assets/McLaren765LT.webp,20019675
+1FAGP8FFXR5141412,Ford,Mustang GT Premium,2024,57338,0,Blue,RWD,Gasoline,Convertible,Automatic,assets/FordMustang.webp,20012345
+YV4L12WCXP2106281,Volvo,V60 B5 Ultimate,2023,43481,11665,White,AWD,Gasoline,Wagon,Automatic,assets/VolvoV60.webp,20090569
+JTHE9JBH7M2036930,Lexus,UX 250h F Sport,2021,27498,41981,Blue,AWD,Hybrid,Crossover,Automatic,assets/LexusUX.webp,20071981
