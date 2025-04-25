@@ -111,7 +111,7 @@
   <body id="ijtr-2">
     <div id="i6cnei" class="container">
       <h1 id="i3g99f">Carcari Vehicle Input Form</h1>
-      <form method="post" action="/submit_car_data" id="iktmhj">
+      <form method="post" action="../backend/submit_car_data.php?seller_id=20019675">
         <div class="form-group"><label for="make">Make:</label><input type="text" id="make-5" name="make"/></div>
         <div class="form-group"><label for="model">Model:</label><input type="text" id="model-5" name="model"/></div>
         <div class="form-group"><label for="trim">Trim:</label><input type="text" id="trim-5" name="trim"/></div>
