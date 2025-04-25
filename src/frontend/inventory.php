@@ -504,7 +504,7 @@
                             echo "<form method='POST' action='../backend/buyCar.php'>";
                             echo "<input type='hidden' name='vin' value='" . htmlspecialchars($entry['VIN']) . "' />";
                             echo "<input type='hidden' name='customer_id' value='10099946' />"; // temp until dynamic ID
-                            echo "<button type='submit' style='background-color:green; color:white; border:none; padding:3px 160px; border-radius:5px; cursor:pointer;'>Buy</button>";
+                            echo "<button type='submit' style='background-color:green; color:white; width:150px; border:none; padding:3px 50px; border-radius:5px; cursor:pointer;'>Buy</button>";
                             echo "</form>";
                         }
 
