@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['vin'])) {
         ");
         $stmt->execute([$vin, $customer_id, $seller_id, $date, $price, $description]);
 
-        //echo "✅ Inserted into Orders\n";
+        echo "✅ Inserted into Orders\n";
 
         // Instead of deleting the car, mark it sold
         $stmt = $pdo->prepare("UPDATE Car SET Sold = 1 WHERE VIN = ?");
@@ -48,10 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['vin'])) {
 
     } catch (Exception $e) {
         $pdo->rollBack();
-        //echo "❌ TRANSACTION ERROR: " . $e->getMessage();
+     //   echo "❌ TRANSACTION ERROR: " . $e->getMessage();
     }
     } else {
-    //echo "❌ VIN not provided.";
+     //echo "❌ VIN not provided.";
     }
 
     header("Location: ../frontend/orderPage.php?customer=$customer_id");

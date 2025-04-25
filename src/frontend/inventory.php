@@ -117,7 +117,9 @@
                 <?php if (isset($_GET['Login']) && $_GET['Login'] == '1'): ?>
                     <button onclick="window.location.href='inputForm.php'">Sell Car</button>
                 <?php endif; ?> 
-                <button onclick="window.location.href='orderPage.php'">View Order</button>
+                 <?php if (isset($_GET['Login']) && $_GET['Login'] == '0'): ?>
+                    <button onclick="window.location.href='orderPage.php'">View Order</button>
+                <?php endif; ?> 
                 <button onclick="window.location.href='index.php'">Logout</button>
             </div>
     </div>
@@ -314,6 +316,13 @@
 
         // Redirect after a car is bought to show clean URL
         if (isset($_GET['buy']) && $_GET['buy'] === 'success') {
+
+
+
+
+
+
+
             header("Location: inventory.php?Login=0&bought=1");
             exit;
         }
@@ -477,13 +486,13 @@
                             // Delete button
                             echo "<form method='POST' action='../backend/deleteCar.php' onsubmit='return confirm(\"Are you sure you want to delete this car?\");'>";
                             echo "<input type='hidden' name='vin' value='" . htmlspecialchars($entry['VIN']) . "' />";
-                            echo "<input type='submit' value='Delete Car' style='background-color:red; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;' />";
+                            echo "<input type='submit' value='Delete Car' style='background-color:red; color:white; border:none; padding:5px 50px; border-radius:5px; cursor:pointer;' />";
                             echo "</form>";
                         
                             // Edit button
                             echo "<form method='GET' action='edit_car.php'>";
                             echo "<input type='hidden' name='id' value='" . htmlspecialchars($entry['VIN']) . "' />";
-                            echo "<button type='submit' style='background-color:#ffc107; color:white; padding:5px 10px; border:none; border-radius:5px; cursor:pointer;'>Edit</button>";
+                            echo "<button type='submit' style='background-color:#ffc107; color:white; padding:5px 70px; border:none; border-radius:5px; cursor:pointer;'>Edit</button>";
                             echo "</form>";
                         
                             echo "</div>"; // close button container
@@ -495,7 +504,7 @@
                             echo "<form method='POST' action='../backend/buyCar.php'>";
                             echo "<input type='hidden' name='vin' value='" . htmlspecialchars($entry['VIN']) . "' />";
                             echo "<input type='hidden' name='customer_id' value='10099946' />"; // temp until dynamic ID
-                            echo "<button type='submit' style='margin-top:10px; background-color:green; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;'>Buy</button>";
+                            echo "<button type='submit' style='background-color:green; color:white; border:none; padding:3px 160px; border-radius:5px; cursor:pointer;'>Buy</button>";
                             echo "</form>";
                         }
 

@@ -17,10 +17,6 @@ ini_set('display_errors', 1);
     <title>Carcari</title>
 <head>
 
-<!-- TODO task for the team 
-        5) Add Buy and sell button on Car Card 
--->
-
 <body>
 
 <?php include "loginPage.php" ?>

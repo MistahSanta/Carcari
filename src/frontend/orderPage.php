@@ -80,7 +80,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <h1>Order History</h1>
 
 <div class="button-container">
-    <a href="https://localhost/Carcari/src/frontend/inventory.php?Login=0" class="back-button">
+    <a href="http://localhost:3000/src/frontend/inventory.php?Login=0" class="back-button">
         ← Back to Inventory
     </a>
 </div>
