@@ -316,13 +316,6 @@
 
         // Redirect after a car is bought to show clean URL
         if (isset($_GET['buy']) && $_GET['buy'] === 'success') {
-
-
-
-
-
-
-
             header("Location: inventory.php?Login=0&bought=1");
             exit;
         }
@@ -356,7 +349,6 @@
 
         if (isset($_GET['applyFilters'])) {
             // Submit button was pressed, so take those value and apply them 
-            // Probably not necessary, but just in case 
             $price = htmlspecialchars(stripslashes(trim($_GET["price"])));   
             $mileage = htmlspecialchars(stripslashes(trim($_GET["mileage"])));
             $year = htmlspecialchars(stripslashes(trim($_GET["year"])));
@@ -415,9 +407,6 @@
             if (!empty($transmission)) {
                 $query_condition[] = "transmission = '" . $transmission . "'";
             }
-            //if (!empty($condition)) {
-                //$query_condition[] = "operational_condition = '" . $condition . "'";
-            //}
         }
 
         // Always exclude sold cars
@@ -436,7 +425,6 @@
         // dynamically generate these card with this info from the database 
         if ($car_entities) {
             // Generate the HTML that PHP will spit back to index.php 
-            // I wish there was a better way to do this tbh 
             while ( $entry = $car_entities->fetch(PDO::FETCH_ASSOC)) {
 
 
@@ -463,11 +451,8 @@
                 $img_url = $client->query("Image", "Car", ["VIN = '" . $entry["VIN"] . "'"] )->fetch(PDO::FETCH_ASSOC)["Image"];
                 
                 echo "<div class='car-card'>";
-                    //echo "<div class='card-image'>";
                     echo "<img src='$img_url' alt='Picture of a car' class='car-image'>";
-                    //echo "<div style='display: flex; flex-direction: column; gap: 10px;'>";
                     echo "<div class = 'car-details'>";
-                    //echo "<div>";
                         echo "<h4>"     .  htmlspecialchars($entry['Year']) . " " . htmlspecialchars($entry['Manufacturer']) . " ". htmlspecialchars($entry['Model'])  . "</h4>";
                         echo "<p> Price: $"   . htmlspecialchars($entry['Price'])  . "</p>";
                         echo "<p> Mileage: " . htmlspecialchars($entry['Mileage']) . "</p>";
@@ -530,4 +515,3 @@
         }
     }
 ?>
-

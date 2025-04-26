@@ -9,13 +9,13 @@ include_once "../api/database.php";
 $required_fields = ['make', 'model', 'trim', 'year', 'color', 'status', 'price', 'engine_specs', 'mileage', 'vin'];
 foreach ($required_fields as $field) {
     if (!isset($_POST[$field]) || trim($_POST[$field]) === '') {
-        die("❌ Missing required field: $field");
+        die("Missing required field: $field");
     }
 }
 
-// Use passed SellerID (you can improve this with sessions or login context)
+
 if (!isset($_GET['seller_id'])) {
-    die("❌ Seller ID not provided.");
+    die("Seller ID not provided.");
 }
 $seller_id = (int)$_GET['seller_id'];
 
@@ -27,12 +27,12 @@ $year        = (int)$_POST['year'];
 $color       = $_POST['color'];
 $price       = (float)$_POST['price'];
 $mileage     = (int)$_POST['mileage'];
-$fuel_type   = "Gasoline"; // Hardcoded unless form includes it
-$drivetrain  = "FWD";      // Hardcoded unless form includes it
-$body_style  = "Sedan";    // Hardcoded unless form includes it
-$transmission= "Automatic"; // Hardcoded unless form includes it
-$image = "../frontend/assets/Camry2004.jpg"; // for backend reference
-$sold        = 0; // New listing is not sold
+$fuel_type   = "Gasoline"; 
+$drivetrain  = "FWD";      
+$body_style  = "Sedan";    
+$transmission= "Automatic"; 
+$image = "../frontend/assets/Camry2004.jpg"; 
+$sold        = 0; 
 
 $db = new DatabaseClient();
 $pdo = $db->customPDO();
@@ -56,6 +56,6 @@ try {
     exit;
 
 } catch (Exception $e) {
-    echo "❌ Failed to insert car: " . $e->getMessage();
+    echo "Failed to insert car: " . $e->getMessage();
 }
 ?>

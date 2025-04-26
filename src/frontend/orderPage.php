@@ -5,18 +5,13 @@ ini_set('display_errors', 1);
 /* ──────────────────────────────────────────────────────────────
    orderPage.php  –  shows the live contents of the Orders table
    ----------------------------------------------------------------
-   Optional URL parameters:
-      ?customer=10013374   → show only that buyer’s orders
-      ?period=pastMonth    → filter by date period
    ────────────────────────────────────────────────────────────── */
 
 include_once __DIR__ . '/../api/database.php';
 $db  = new DatabaseClient();
 $pdo = $db->customPDO();
 
-// Print current DB name for debug
 $stmt = $pdo->query("SELECT DATABASE()");
-//echo "🔍 Current DB: " . $stmt->fetchColumn() . "<br>";
 
 $where = [];
 $bind = [];
@@ -54,10 +49,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($bind);
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Debug printout
-//echo "<pre>RAW ORDER FETCH:\n";
-//print_r($orders);
-//echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -80,15 +71,13 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <h1>Order History</h1>
 
 <div class="button-container">
-    <a href="http://localhost/Carcari/src/frontend/inventory.php?Login=0" class="back-button">
+    <a href="https://localhost/Carcari/src/frontend/inventory.php?Login=0" class="back-button">
         ← Back to Inventory
     </a>
 </div>
 
 <pre>
 <?php
-//echo "Customer ID Filter: " . ($_GET['customer'] ?? 'None') . "\n";
-//echo "Order Count: " . count($orders) . "\n";
 ?>
 </pre>
 

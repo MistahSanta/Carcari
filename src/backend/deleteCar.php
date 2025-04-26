@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['vin'])) {
     $db = new DatabaseClient();
 
     try {
-        $pdo = $db->customPDO(); // Assumes you have this method exposed
+        $pdo = $db->customPDO(); 
         $stmt = $pdo->prepare("DELETE FROM Car WHERE VIN = ?");
         $stmt->execute([$vin]);
 

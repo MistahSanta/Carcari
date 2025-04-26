@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
                 exit;
             } else {
                 // Incorrect password 
-                // TODO add a retry feature -stretch goal 
                 header("Location: ../frontend/index.php?Login=failed");
                 exit;
             }
